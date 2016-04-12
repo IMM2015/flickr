@@ -11,6 +11,7 @@ html, body, .gallery {
 }
 body {
 	font-family: Rufina, Georgia, serif;
+	background-color: #333;
 }
 .header {
 	padding:10px 0;
@@ -18,11 +19,22 @@ body {
 	color: #999;
 	text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
-.gallery img {
-	max-width:300px;
-	max-height:300px;
-	cursor:pointer;
-	z-index:0;
-	vertical-align: bottom;
-	display: block;
+
+.polaroid {
+	width: 300px;
+	border: 5px solid #fff;
+	margin: 5px;
+}
+.polaroid img {
+	width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+.polaroid figcaption {
+	background-color: #fff;
+	color: #222;
+	padding: 1em 0;
+	font: 1em 'Homemade Apple', cursive;
+	line-height: 1;
+	text-align: center;
 }
