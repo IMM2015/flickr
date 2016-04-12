@@ -1,24 +1,49 @@
-// Data structure within infinite size (Array)
-var album = [
-	{ 'src':'3.jpg', 'cap':'Beach phone' },
-	{ 'src':'1.jpg', 'cap':'Another camera' },
-	{ 'src':'2.jpg', 'cap':'Disco thing' },
-	{ 'src':'3.jpg', 'cap':'Beach phone' },
-	{ 'src':'1.jpg', 'cap':'Another camera' },
-	{ 'src':'2.jpg', 'cap':'Disco thing' }
-];
-// The above is STATIC
 
-// For each of the album nodes
-$.each(album, function(index, photo) {
-	// index = node/photo number, starting at 0, increasing by 1 EACH time
-	// photo = is the photo {object} itself
-	$('<img>')
-		.attr('src', 'images/' + photo.src)
-		.attr('alt', photo.cap)
-		.appendTo('.gallery');
+
+
+var searchphotos = function(term) {
+	// Clear the gallery
+	$('.gallery').empty();
+
+
+	// The below is a DYNAMIC search
+
+	// 1. Where to load the data
+	var flickr = 'http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?';
+
+	// 2. Parameters for the image
+	var params = {tags: term, tagmode: "any", format: "json"};
+
+	// 3. Load and handle the data
+	$.getJSON(flickr, params, function(result) {
+
+		// For each of the items nodes...
+		$.each(result.items, function(index, photo) {
+			// index = node/photo number, starting at 0, increasing by 1 EACH time
+			// photo = is the photo {object} itself
+			$('<img>')
+				.attr('src', photo.media.m)
+				.attr('alt', photo.title)
+				.appendTo('.gallery');
+		});
+
+	});
+};
+
+// When I click the SEARCH button
+$('.go').on('click', function() {
+
+	// Store the term
+	var term = $('.term').val();
+
+	// Run a search
+	searchphotos(term);
 
 });
+
+
+
+
 
 
 
